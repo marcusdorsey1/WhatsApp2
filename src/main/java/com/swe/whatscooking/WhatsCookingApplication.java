@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class WhatscookingApplication {
+public class WhatsCookingApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(WhatscookingApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(WhatsCookingApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(WhatscookingApplication.class, args);
+		SpringApplication.run(WhatsCookingApplication.class, args);
 	}
 
 	@Bean
@@ -26,6 +26,7 @@ public class WhatscookingApplication {
 
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+		// API Website link https://sv443.net/jokeapi/v2/
 		return args -> {
 			Joke joke = restTemplate.getForObject(
 					"https://v2.jokeapi.dev/joke/Pun", Joke.class);
