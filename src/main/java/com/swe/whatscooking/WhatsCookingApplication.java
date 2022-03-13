@@ -27,17 +27,17 @@ public class WhatsCookingApplication {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
-/*
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		// API Website link https://sv443.net/jokeapi/v2/
-		return args -> {
-			Joke joke = restTemplate.getForObject(
-					"https://v2.jokeapi.dev/joke/Pun", Joke.class);
-			log.info(joke.toString());
-		};
-	}
-*/
+
+//	@Bean
+//	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+//		// API Website link https://sv443.net/jokeapi/v2/
+//		return args -> {
+//			Joke joke = restTemplate.getForObject(
+//					"https://v2.jokeapi.dev/joke/Pun", Joke.class);
+//			log.info(joke.toString());
+//		};
+//	}
+
 	@Bean
 	public KrogerClient getClientToken(RestTemplate restTemplate) throws Exception {
 		// API Website link https://sv443.net/jokeapi/v2/
