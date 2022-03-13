@@ -18,29 +18,31 @@ public class KrogerController {
 
     @GetMapping("/krogerAPI")
     public RedirectView redirectToKroger(RedirectAttributes redirectAttributes){
-        String authURL;
-        String scope;
-        String clientId;
-        String redirectUri;
-        scope = "cart.basic:write";
-        clientId = "whatscooking-acf72f4b2dbda6aa726382a398050a863025969198037206606";
-        //redirectUri = "http://localhost:8080/callback";
-        redirectUri = "http://127.0.0.1:8080/callback";
-        authURL = "https://api.kroger.com/v1/connect/oauth2/authorize";
+        // Authorization parameters of GET request
+        String authURL = "https://api.kroger.com/v1/connect/oauth2/authorize";
+        String scope = "cart.basic:write";
+        String clientId = "whatscooking-acf72f4b2dbda6aa726382a398050a863025969198037206606";
+        String redirectUri = "http://127.0.0.1:8080/callback";
+        // Adding headers to the Redirect request for Kroger permission
         redirectAttributes.addAttribute("scope",scope);
         redirectAttributes.addAttribute("response_type","code");
         redirectAttributes.addAttribute("client_id",clientId);
         redirectAttributes.addAttribute("redirect_uri",redirectUri);
         redirectAttributes.addAttribute("state", "Testing");
+        // Redirecting to Kroger approval page
         return new RedirectView(authURL);
     }
 
+    // Location where kroger returns the code
     @GetMapping("/callback")
     public String getToken(@RequestParam("code") String code){
-        System.out.println("The code is as follows");
+        System.out.println("The code is as follows:");
         System.out.println(code);
+        // Creating customer token container
         KrogerCustomer krogerCustomer;
+        // Service that creates generates the access token with the provided code of authorization from Kroger
         krogerCustomer = krogerService.getAccessToken(code);
+        // Sending request to add products into the Kroger Cart
         krogerService.orderProducts(krogerCustomer.getAccess_token(),"0001111041700");
         return "redirect:home";
     }

@@ -17,8 +17,6 @@ import java.util.Base64;
 @SpringBootApplication
 public class WhatsCookingApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(WhatsCookingApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(WhatsCookingApplication.class, args);
 	}
@@ -27,16 +25,6 @@ public class WhatsCookingApplication {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
-
-//	@Bean
-//	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-//		// API Website link https://sv443.net/jokeapi/v2/
-//		return args -> {
-//			Joke joke = restTemplate.getForObject(
-//					"https://v2.jokeapi.dev/joke/Pun", Joke.class);
-//			log.info(joke.toString());
-//		};
-//	}
 
 	@Bean
 	public KrogerClient getClientToken(RestTemplate restTemplate) throws Exception {
@@ -48,13 +36,12 @@ public class WhatsCookingApplication {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		responseHeaders.add("Authorization", "Basic " + new String(encodedBytes));
-//		System.out.println(responseHeaders.toString());
 		HttpEntity<String> request = new HttpEntity<>(body, responseHeaders);
 
 //		System.out.println("Has Body? " + request.hasBody());
 //		System.out.println("Here is the body Body? " + request.getBody());
 		KrogerClient krogerClient = restTemplate.postForObject("https://api.kroger.com/v1/connect/oauth2/token",request, KrogerClient.class);
-		log.info(krogerClient.toString());
+		System.out.println(krogerClient.toString());
 
 		return krogerClient;
 	}

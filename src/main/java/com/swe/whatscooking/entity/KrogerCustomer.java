@@ -47,4 +47,14 @@ public class KrogerCustomer {
     public void setRefresh_token(String refresh_token) {
         this.refresh_token = refresh_token;
     }
+
+    @Override
+    public String toString() {
+        return "KrogerCustomer{" +
+                "expires_in='" + expires_in + '\'' +
+                ", access_token='" + access_token + '\'' +
+                ", token_type='" + token_type + '\'' +
+                ", refresh_token='" + refresh_token + '\'' +
+                '}';
+    }
 }
