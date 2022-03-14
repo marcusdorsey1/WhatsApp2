@@ -1,8 +1,6 @@
 package com.swe.whatscooking.service;
 
-import com.swe.whatscooking.entity.KrogerClient;
 import com.swe.whatscooking.entity.KrogerCustomer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

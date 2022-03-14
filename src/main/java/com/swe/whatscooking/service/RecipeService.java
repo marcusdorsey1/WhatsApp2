@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -14,6 +15,11 @@ public class RecipeService {
 
     public List<Recipe> retrieveAllRecipes(){
         return (List<Recipe>) recipeRepository.findAll();
+    }
+
+    public Optional<Recipe> retrieveRecipeByID(Long id){
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        return recipe;
     }
 
 }

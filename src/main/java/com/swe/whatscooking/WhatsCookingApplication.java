@@ -1,8 +1,6 @@
 package com.swe.whatscooking;
 
 import com.swe.whatscooking.entity.KrogerClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
