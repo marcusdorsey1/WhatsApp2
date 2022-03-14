@@ -45,7 +45,7 @@ public class KrogerService {
     public void orderProducts(String token, String products){
         // Rest connection to add product into cart
         //TODO: Currently hard coded, but items will be updated to be dynamic
-        String body = "{ \"items\": [{\"upc\": \"0001111041700\",\"quantity\": 1}]}";
+        String body = "{ \"items\": [{\"upc\": \"0021065600000\",\"quantity\": 1},{\"upc\": \"0001111004970\",\"quantity\": 1},{\"upc\": \"0000000004608\",\"quantity\": 1}]}";
 
         // Adding Headers to request
         HttpHeaders responseHeaders = new HttpHeaders();
