@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,5 +33,15 @@ public class RecipeController {
     public ResponseEntity<Optional<Recipe>> getRecipeById(@PathVariable Long id){
         Optional<Recipe> recipe = recipeService.retrieveRecipeByID(id);
         return new ResponseEntity<Optional<Recipe>>(recipe, HttpStatus.OK);
+    }
+    @GetMapping("/recipes/cuisine")
+    public ResponseEntity<List<Recipe>> getRecipeByCuisine(@RequestParam(name="cuisine") String cuisine){
+        List<Recipe> recipes = recipeService.retrieveRecipeByCuisine(cuisine);
+        return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
+    }
+    @GetMapping("/recipes/name")
+    public ResponseEntity<List<Recipe>> getRecipeByName(@RequestParam(name="name") String name){
+        List<Recipe> recipes = recipeService.retrieveRecipeByName(name);
+        return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
     }
 }

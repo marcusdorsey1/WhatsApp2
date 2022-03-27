@@ -21,5 +21,14 @@ public class RecipeService {
         Optional<Recipe> recipe = recipeRepository.findById(id);
         return recipe;
     }
+    public  List<Recipe> retrieveRecipeByName(String name){
+        List<Recipe> recipes = recipeRepository.findByName(name);
+        return recipes;
+    }
+
+    public  List<Recipe> retrieveRecipeByCuisine(String cuisine){
+        List<Recipe> recipes = recipeRepository.findByCuisine(cuisine);
+        return recipes;
+    }
 
 }
