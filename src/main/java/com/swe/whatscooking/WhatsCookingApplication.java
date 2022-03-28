@@ -1,6 +1,10 @@
 package com.swe.whatscooking;
 
 import com.swe.whatscooking.entity.KrogerClient;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -38,6 +42,7 @@ public class WhatsCookingApplication {
 
 //		System.out.println("Has Body? " + request.hasBody());
 //		System.out.println("Here is the body Body? " + request.getBody());
+
 		// Removed line, while we are not using the functionality
 		//KrogerClient krogerClient = restTemplate.postForObject("https://api.kroger.com/v1/connect/oauth2/token",request, KrogerClient.class);
 		KrogerClient krogerClient = new KrogerClient();
@@ -45,5 +50,4 @@ public class WhatsCookingApplication {
 
 		return krogerClient;
 	}
-
 }
