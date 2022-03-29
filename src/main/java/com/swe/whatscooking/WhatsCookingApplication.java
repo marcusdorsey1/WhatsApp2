@@ -1,20 +1,19 @@
 package com.swe.whatscooking;
 
 import com.swe.whatscooking.entity.KrogerClient;
-import io.swagger.v3.oas.models.ExternalDocumentation;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
+import com.swe.whatscooking.entity.TastyAPI.TastyRecipe;
+import com.swe.whatscooking.entity.TastyAPI.TastyRecipeSearch;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @SpringBootApplication
 public class WhatsCookingApplication {
@@ -49,5 +48,24 @@ public class WhatsCookingApplication {
 		System.out.println(krogerClient.toString());
 
 		return krogerClient;
+	}
+	@Bean
+	public List<TastyRecipe> getTastyRecipes(RestTemplate restTemplate) throws Exception {
+		// API Website link https://sv443.net/jokeapi/v2/
+		HttpHeaders responseHeaders = new HttpHeaders();
+		List<MediaType> list = new ArrayList<>();
+		list.add(MediaType.APPLICATION_JSON);
+		responseHeaders.setAccept(list);
+		responseHeaders.add("X-RapidAPI-Host", "tasty.p.rapidapi.com");
+		responseHeaders.add("X-RapidAPI-Key", "577422b5c7mshcf41f00911ef268p1b79f5jsn812ae4218dff");
+		HttpEntity<String> request = new HttpEntity<String>(responseHeaders);
+
+		// Removed line, while we are not using the functionality
+		ResponseEntity<TastyRecipeSearch> tastyRecipeSearch = restTemplate.exchange(
+				URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=10&tags=under_30_minutes"),HttpMethod.GET, request, TastyRecipeSearch.class);
+		//KrogerClient krogerClient = new KrogerClient();
+		System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
+
+		return tastyRecipeSearch.getBody().getResults();
 	}
 }
