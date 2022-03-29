@@ -49,6 +49,7 @@ public class WhatsCookingApplication {
 
 		return krogerClient;
 	}
+
 	@Bean
 	public List<TastyRecipe> getTastyRecipes(RestTemplate restTemplate) throws Exception {
 		// API Website link https://sv443.net/jokeapi/v2/
@@ -67,5 +68,36 @@ public class WhatsCookingApplication {
 		System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
 
 		return tastyRecipeSearch.getBody().getResults();
+	}
+
+	@Bean
+	public TastyRecipe getTastyRecipe(RestTemplate restTemplate) throws Exception {
+		// API Website link https://sv443.net/jokeapi/v2/
+		HttpHeaders responseHeaders = new HttpHeaders();
+		List<MediaType> list = new ArrayList<>();
+		list.add(MediaType.APPLICATION_JSON);
+		responseHeaders.setAccept(list);
+		responseHeaders.add("X-RapidAPI-Host", "tasty.p.rapidapi.com");
+		responseHeaders.add("X-RapidAPI-Key", "577422b5c7mshcf41f00911ef268p1b79f5jsn812ae4218dff");
+		HttpEntity<String> request = new HttpEntity<String>(responseHeaders);
+
+		// Removed line, while we are not using the functionality
+		ResponseEntity<TastyRecipe> tastyRecipe = restTemplate.exchange(
+				URI.create("https://tasty.p.rapidapi.com/recipes/get-more-info?id=8160"),HttpMethod.GET, request, TastyRecipe.class);
+		//KrogerClient krogerClient = new KrogerClient();
+		System.out.println("Printing out the Recipe");
+		System.out.println(tastyRecipe.getBody().toString());
+		System.out.println("Printing out the instructions of the Recipe");
+		System.out.println(tastyRecipe.getBody().getInstructions());
+		System.out.println("Printing out the selection of the Recipe");
+		System.out.println(tastyRecipe.getBody().getSections());
+		System.out.println("Printing out one selection components of the Recipe");
+		System.out.println(tastyRecipe.getBody().getSections().get(1).getComponents());
+		System.out.println("Printing out one of the components");
+		System.out.println(tastyRecipe.getBody().getSections().get(1).getComponents().get(1).getIngredient());
+		System.out.println("Printing out ingredient of selection");
+		System.out.println(tastyRecipe.getBody().getSections().get(1).getComponents().get(1).getIngredient());
+
+		return tastyRecipe.getBody();
 	}
 }

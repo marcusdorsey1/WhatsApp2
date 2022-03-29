@@ -1,25 +1,24 @@
 package com.swe.whatscooking.entity.TastyAPI;
 
+import java.util.List;
+
 public class TastyRecipe {
     private Long id;
     private String description;
     private int num_servings;
     private String name;
     private String thumbnail_url;
+    private List<TastySection> sections;
+    private List<TastyInstruction> instructions;
 
-    public TastyRecipe(Long id, String description, int num_servings, String name, String thumbnail_url) {
+    public TastyRecipe(Long id, String description, int num_servings, String name, String thumbnail_url, List<TastySection> sections, List<TastyInstruction> instructions) {
         this.id = id;
         this.description = description;
         this.num_servings = num_servings;
         this.name = name;
         this.thumbnail_url = thumbnail_url;
-    }
-
-    public TastyRecipe(String description, int num_servings, String name, String thumbnail_url) {
-        this.description = description;
-        this.num_servings = num_servings;
-        this.name = name;
-        this.thumbnail_url = thumbnail_url;
+        this.sections = sections;
+        this.instructions = instructions;
     }
 
     public TastyRecipe() {
@@ -65,6 +64,22 @@ public class TastyRecipe {
         this.thumbnail_url = thumbnail_url;
     }
 
+    public List<TastySection> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<TastySection> sections) {
+        this.sections = sections;
+    }
+
+    public List<TastyInstruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<TastyInstruction> instructions) {
+        this.instructions = instructions;
+    }
+
     @Override
     public String toString() {
         return "TastyRecipe{" +
@@ -73,6 +88,8 @@ public class TastyRecipe {
                 ", num_servings=" + num_servings +
                 ", name='" + name + '\'' +
                 ", thumbnail_url='" + thumbnail_url + '\'' +
+                ", sections=" + sections +
+                ", instructions=" + instructions +
                 '}';
     }
 }
