@@ -16,8 +16,5 @@ public class SwaggerConfig {
                         .description("Recipe application developed by team 5")
                         .version("v")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")));
-				/*.externalDocs(new ExternalDocumentation()
-						.description("SpringShop Wiki Documentation")
-						.url("https://springshop.wiki.github.org/docs"));*/
     }
 }
