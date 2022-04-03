@@ -1,6 +1,7 @@
 package com.swe.whatscooking.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -9,20 +10,36 @@ public class Recipe {
     private Long id;
 
     private String name;
-    private String ingredients;
-    private String process;
+    private String cuisine;
+    private Integer serving_size;
+    private String description;
+    private String image;
 
-    public Recipe(Long id, String name, String ingredients, String process) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
+    private List<Ingredient> ingredients;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = CascadeType.ALL)
+    private List<Process> processes;
+
+    public Recipe(Long id, String name, String cuisine, Integer serving_size, String description, String image, List<Ingredient> ingredients, List<Process> processes) {
         this.id = id;
         this.name = name;
+        this.cuisine = cuisine;
+        this.serving_size = serving_size;
+        this.description = description;
+        this.image = image;
         this.ingredients = ingredients;
-        this.process = process;
+        this.processes = processes;
     }
 
-    public Recipe(String name, String ingredients, String process) {
+    public Recipe(String name, String cuisine, Integer serving_size, String description, String image, List<Ingredient> ingredients, List<Process> processes) {
         this.name = name;
+        this.cuisine = cuisine;
+        this.serving_size = serving_size;
+        this.description = description;
+        this.image = image;
         this.ingredients = ingredients;
-        this.process = process;
+        this.processes = processes;
     }
 
     public Recipe() {
@@ -44,19 +61,51 @@ public class Recipe {
         this.name = name;
     }
 
-    public String getIngredients() {
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public Integer getServing_size() {
+        return serving_size;
+    }
+
+    public void setServing_size(Integer serving_size) {
+        this.serving_size = serving_size;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public String getProcess() {
-        return process;
+    public List<Process> getProcesses() {
+        return processes;
     }
 
-    public void setProcess(String process) {
-        this.process = process;
+    public void setProcesses(List<Process> processes) {
+        this.processes = processes;
     }
 }
