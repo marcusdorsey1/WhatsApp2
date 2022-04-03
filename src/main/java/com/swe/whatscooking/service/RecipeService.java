@@ -17,8 +17,9 @@ public class RecipeService {
         return (List<Recipe>) recipeRepository.findAll();
     }
 
-    public Optional<Recipe> retrieveRecipeByID(Long id){
-        Optional<Recipe> recipe = recipeRepository.findById(id);
+    public Recipe retrieveRecipeByID(Long id){
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        Recipe recipe = recipeOptional.orElseThrow(RecipeNotFoundException::new);
         return recipe;
     }
     public  List<Recipe> retrieveRecipeByName(String name){

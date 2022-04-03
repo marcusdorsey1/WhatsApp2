@@ -30,9 +30,9 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{id}")
-    public ResponseEntity<Optional<Recipe>> getRecipeById(@PathVariable Long id){
-        Optional<Recipe> recipe = recipeService.retrieveRecipeByID(id);
-        return new ResponseEntity<Optional<Recipe>>(recipe, HttpStatus.OK);
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id){
+        Recipe recipe = recipeService.retrieveRecipeByID(id);
+        return new ResponseEntity<Recipe>(recipe, HttpStatus.OK);
     }
     @GetMapping("/recipes/cuisine")
     public ResponseEntity<List<Recipe>> getRecipeByCuisine(@RequestParam(name="cuisine") String cuisine){
