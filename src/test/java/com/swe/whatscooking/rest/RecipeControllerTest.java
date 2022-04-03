@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -39,6 +41,26 @@ public class RecipeControllerTest {
     public void getRecipeNoAccess() {
         ResponseEntity<Recipe> response =
                 this.restTemplate.getForEntity("http://localhost:" + port + "/recipes/1", Recipe.class);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.UNAUTHORIZED));
+    }
+
+    @Test
+    public void getRecipeByCuisineNoAccess() {
+        Map<String,String> uriVariables = new HashMap<>();
+        uriVariables.put("cuisine", "Latin");
+        ResponseEntity<Recipe> response =
+                this.restTemplate.getForEntity("http://localhost:" + port + "/recipes/cuisine", Recipe.class, uriVariables);
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.UNAUTHORIZED));
+    }
+
+    @Test
+    public void getRecipeByNameNoAccess() {
+        Map<String,String> uriVariables = new HashMap<>();
+        uriVariables.put("name", "Pizza");
+        ResponseEntity<Recipe> response =
+                this.restTemplate.getForEntity("http://localhost:" + port + "/recipes/name", Recipe.class, uriVariables);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.UNAUTHORIZED));
     }
