@@ -44,41 +44,29 @@
         <div class=" container p-5">
             <div class="row">
             <div class="col-6 offset-lg-3">
-                <h2>Chicken Alfredo</h2>
-                <img th:src="@{/img/food.jpg}" class="rounded border" alt="Missing" width="500" height="300"></div>
+                <h2 th:text="${recipe.name}">Recipe Name</h2>
+                <img th:src="${recipe.thumbnail_url}" class="rounded border" alt="Missing" width="500" height="300"></div>
             </div>
                 <div class="row">
                 <div class="col-6 offset-lg-3">
                     <form action="#" method="GET" th:action="@{/krogerAPI}" class="rounded">
                         <p><h4>Select your ingredients to order:</h4></p>
-                          <input type="checkbox" id="milk" name="milk" value="milk">
-                          <label for="milk">2 tbsp. extra-virgin olive oil</label><br>
-                          <input type="checkbox" id="boneless" name="boneless" value="boneless">
-                          <label for="boneless">2 boneless skinless chicken breasts</label><br>
-                          <input type="checkbox" id="salt" name="salt" value="salt">
-                          <label for="salt">Kosher salt</label><br>
-                          <input type="checkbox" id="pepper" name="pepper" value="pepper">
-                          <label for="pepper">ground black pepper</label><br>
-                          <input type="checkbox" id="broth" name="broth" value="broth">
-                          <label for="broth">1 1/2 c. chicken broth</label><br>
-                          <input type="checkbox" id="garlic" name="garlic" value="garlic">
-                          <label for="garlic">2 cloves garlic, minced</label><br>
-                          <input class="btn btn-primary" type="submit" value="Order Ingredients">
+                        <div th:each="ingredient : ${recipe.ingredients}">
+                          <input type="checkbox" th:name="${ingredient.name}">
+                          <label th:text="${ingredient.name}">Ingredient</label>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Order Ingredients">
                     </form>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 offset-lg-3 pt-1">
                     <h4>Instructions</h4>
-                          <p>
-                    In a large skillet over medium-high heat, heat oil. Add chicken and season with salt and pepper.
-                    Cook until golden and cooked through, 8 minutes per side. Let rest 10 minutes, then slice.
-                </p>
-                    <p>Add milk, broth, and garlic to skillet. Season with salt and pepper and bring to a simmer.
-                        Add fettuccine, stirring frequently for about 3 minutes. Let cook until al dente,
-                        8 minutes more. </p>
-                    <p>Stir in heavy cream and Parmesan until combined. Simmer until sauce thickens. </p>
-                    <p>Remove from heat and stir in sliced chicken. Garnish with parsley. </p>
+                    <ol>
+                        <span th:each="process : ${recipe.processes}">
+                            <li th:text="${process.description}">Step Instruction</li>
+                        </span>
+                    </ol>
                 </div>
 
             </div>

@@ -29,6 +29,11 @@ public class Process {
         this.recipe = recipe;
     }
 
+    public Process(String description, int step) {
+        this.description = description;
+        this.step = step;
+    }
+
     public Process() {
     }
 

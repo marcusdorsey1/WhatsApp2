@@ -31,6 +31,11 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
+    public Ingredient(String name, String measurement) {
+        this.name = name;
+        this.measurement = measurement;
+    }
+
     public Ingredient() {
     }
 

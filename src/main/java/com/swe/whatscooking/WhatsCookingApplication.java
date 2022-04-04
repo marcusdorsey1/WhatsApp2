@@ -50,7 +50,7 @@ public class WhatsCookingApplication {
 		return krogerClient;
 	}
 
-	@Bean
+/*	@Bean
 	public List<TastyRecipe> getTastyRecipes(RestTemplate restTemplate) throws Exception {
 		// API Website link https://sv443.net/jokeapi/v2/
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -68,9 +68,9 @@ public class WhatsCookingApplication {
 		System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
 
 		return tastyRecipeSearch.getBody().getResults();
-	}
+	}*/
 
-	@Bean
+/*	@Bean
 	public TastyRecipe getTastyRecipe(RestTemplate restTemplate) throws Exception {
 		// API Website link https://sv443.net/jokeapi/v2/
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -99,5 +99,5 @@ public class WhatsCookingApplication {
 		System.out.println(tastyRecipe.getBody().getSections().get(1).getComponents().get(1).getIngredient());
 
 		return tastyRecipe.getBody();
-	}
+	}*/
 }
