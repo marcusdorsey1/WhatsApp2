@@ -28,7 +28,7 @@ public class TastyAPIService {
 
         // Removed line, while we are not using the functionality
         ResponseEntity<TastyRecipeSearch> tastyRecipeSearch = restTemplate.exchange(
-                URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=5&tags=under_30_minutes"),HttpMethod.GET, request, TastyRecipeSearch.class);
+                URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=7&tags=under_30_minutes"),HttpMethod.GET, request, TastyRecipeSearch.class);
         //KrogerClient krogerClient = new KrogerClient();
         System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
 
