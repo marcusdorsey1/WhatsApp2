@@ -2,10 +2,12 @@ package com.swe.whatscooking.controller;
 import com.swe.whatscooking.dto.RecipeDTO;
 import com.swe.whatscooking.entity.Ingredient;
 import com.swe.whatscooking.entity.Process;
+import com.swe.whatscooking.entity.Recipe;
 import com.swe.whatscooking.entity.TastyAPI.TastyComponent;
 import com.swe.whatscooking.entity.TastyAPI.TastyInstruction;
 import com.swe.whatscooking.entity.TastyAPI.TastyRecipe;
 import com.swe.whatscooking.entity.TastyAPI.TastySection;
+import com.swe.whatscooking.service.RecipeService;
 import com.swe.whatscooking.service.TastyAPIService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,12 @@ import java.util.List;
 @RequestMapping("/recipeDir")
 public class recipeDir {
     private TastyAPIService tastyAPIService;
+    private RecipeService recipeService;
 
-    public recipeDir(TastyAPIService tastyAPIService) {
+    public recipeDir(TastyAPIService tastyAPIService, RecipeService recipeService) {
         this.tastyAPIService = tastyAPIService;
+        this.recipeService = recipeService;
     }
-
     /*@GetMapping
     public String getRecipeDir(){
         return "recipeDir";
@@ -43,6 +46,20 @@ public class recipeDir {
         }
 
         return "recipeDir";
+    }
+
+    @GetMapping("/create")
+    public String getRegistrationForm(Model model){
+        return "createRecipe";
+    }
+    @PostMapping("/create-recipe")
+    public String newRegistration(@ModelAttribute Recipe recipe, Model model){
+        try{
+            recipeService.saveRecipe(recipe);
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
+        return "redirect:/registration";
     }
 
     private RecipeDTO convertTastyRecipeToRecipeDTO(TastyRecipe tastyRecipe){

@@ -32,4 +32,8 @@ public class RecipeService {
         return recipes;
     }
 
+    public Recipe saveRecipe(Recipe recipe){
+        return recipeRepository.save(recipe);
+    }
+
 }
