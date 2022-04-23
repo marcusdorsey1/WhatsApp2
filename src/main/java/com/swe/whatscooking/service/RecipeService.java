@@ -31,9 +31,4 @@ public class RecipeService {
         List<Recipe> recipes = recipeRepository.findByCuisine(cuisine);
         return recipes;
     }
-
-    public Recipe saveRecipe(Recipe recipe){
-        return recipeRepository.save(recipe);
-    }
-
 }

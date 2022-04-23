@@ -48,19 +48,6 @@ public class recipeDir {
         return "recipeDir";
     }
 
-    @GetMapping("/create")
-    public String getRegistrationForm(Model model){
-        return "createRecipe";
-    }
-    @PostMapping("/create-recipe")
-    public String newRegistration(@ModelAttribute Recipe recipe, Model model){
-        try{
-            recipeService.saveRecipe(recipe);
-        }catch (Exception e){
-            System.out.println(e.toString());
-        }
-        return "redirect:/registration";
-    }
 
     private RecipeDTO convertTastyRecipeToRecipeDTO(TastyRecipe tastyRecipe){
         RecipeDTO recipeDTO = new RecipeDTO();
