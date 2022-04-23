@@ -41,7 +41,7 @@ public class MyRecipeController {
 
     @PostMapping("/delete-recipe")
     public String deleteRecipe(@ModelAttribute Recipe recipe, Model model){
-        //recipeService.deleteRecipe(recipe.getId());
+        myRecipeService.deleteRecipe(recipe.getId());
         return "redirect:/my-recipes";
     }
 }

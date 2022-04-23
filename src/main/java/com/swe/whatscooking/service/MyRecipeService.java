@@ -15,4 +15,8 @@ public class MyRecipeService {
     public Integer insertRecipe(Recipe recipe){
         return recipeMapper.insertRecipe(recipe);
     }
+
+    public void deleteRecipe(Long recipeId){
+        recipeMapper.deleteRecipe(recipeId);
+    }
 }
