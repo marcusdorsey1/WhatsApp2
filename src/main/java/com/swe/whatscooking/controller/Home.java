@@ -37,7 +37,7 @@ public class Home {
             System.out.println(e);
         }
         model.addAttribute("recipes", recipesDTO);*/
-        return "weeklyView";
+        return "home";
     }
 
     private RecipeDTO convertTastyRecipeToRecipeDTO(TastyRecipe tastyRecipe){

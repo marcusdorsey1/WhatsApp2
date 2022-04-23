@@ -41,3 +41,6 @@ INSERT INTO process(id ,recipe_id ,step , description) VALUES (16,3,1,'Split gro
 INSERT INTO process(id ,recipe_id ,step , description) VALUES (17,3,2,'On a flat iron, put the burger to cook untild the desire temperature is met');
 INSERT INTO process(id ,recipe_id ,step , description) VALUES (18,3,3,'Peel lettus for the desire size to add on burger');
 INSERT INTO process(id ,recipe_id ,step , description) VALUES (19,3,4,'Put the burger inside the buns, and top it with the tomatoes, letuce, and other condiments wanted.');
+
+INSERT INTO menu (id ,recipe_id , source) VALUES (1,1,'Internal');
+INSERT INTO menu (id ,recipe_id , source) VALUES (2,2,'Internal');
