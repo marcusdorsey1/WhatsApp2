@@ -11,7 +11,8 @@
     <div class="row">
         <div class="col-6 offset-lg-3">
             <h2>Create Ingredient</h2>
-            <form class="" action="#" th:action="@{/recipeDir/create-ingredient}" method="POST">
+            <form class="" action="#" th:action="@{/ingredients/add-ingredient}" method="POST">
+                <input type="hidden" name="recipe_id" th:value="${recipeId}">
                 <dl class="form-group">
                     <dt class="form-control-label">Name</dt>
                     <dd><input class="form-control" type="text" name="name"/></dd>
@@ -26,8 +27,13 @@
                 </dl>
                 <div>
                     <input class="btn btn-primary" type="submit" value="Add Ingredient">
-                    <a th:href="@{/recipeDir/create-process)}" class="btn btn-light">Next Step</a>
                 </div>
+            </form>
+            <form action="#" method="GET" th:action="@{/processes/add-process}">
+                <input type="hidden" name="recipeId" th:value="${recipeId}">
+                <button type="submit" class="btn btn-danger btn-light">
+                    Next Step
+                </button>
             </form>
         </div>
     </div>

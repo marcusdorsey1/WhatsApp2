@@ -35,13 +35,18 @@ public class MyRecipeController {
 
     @PostMapping("/create-recipe")
     public String newRecipe(@ModelAttribute Recipe recipe, Model model){
-        myRecipeService.insertRecipe(recipe);
-        return "redirect:/my-recipes";
+        Long recipeId = myRecipeService.insertRecipe(recipe);
+        System.out.println("My New recipe ID is:" + recipeId);
+        model.addAttribute("recipeId", recipeId);
+        return "AddIngredient";
     }
 
     @PostMapping("/delete-recipe")
-    public String deleteRecipe(@ModelAttribute Recipe recipe, Model model){
+    public String delRecipe(@ModelAttribute Recipe recipe, Model model){
+        myRecipeService.removeIngredients(recipe.getId());
+        myRecipeService.removeProcesses(recipe.getId());
         myRecipeService.deleteRecipe(recipe.getId());
         return "redirect:/my-recipes";
     }
+
 }

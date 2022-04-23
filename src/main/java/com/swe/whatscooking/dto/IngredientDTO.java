@@ -1,42 +1,18 @@
-package com.swe.whatscooking.entity;
+package com.swe.whatscooking.dto;
 
-import javax.persistence.*;
-
-@Entity
-public class Ingredient {
-    @Id
-    @GeneratedValue
+public class IngredientDTO {
     private Long id;
-
     private String name;
     private  int quantity;
     private String measurement;
+    private Long recipe_id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
-
-    public Ingredient(Long id, String name, int quantity, String measurement, Recipe recipe) {
+    public IngredientDTO(Long id, String name, int quantity, String measurement, Long recipe_id) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.measurement = measurement;
-        this.recipe = recipe;
-    }
-
-    public Ingredient(String name, int quantity, String measurement, Recipe recipe) {
-        this.name = name;
-        this.quantity = quantity;
-        this.measurement = measurement;
-        this.recipe = recipe;
-    }
-
-    public Ingredient(String name, String measurement) {
-        this.name = name;
-        this.measurement = measurement;
-    }
-
-    public Ingredient() {
+        this.recipe_id = recipe_id;
     }
 
     public Long getId() {
@@ -71,18 +47,22 @@ public class Ingredient {
         this.measurement = measurement;
     }
 
-    public Long getRecipeId(){
-        return this.recipe.getId();
+    public Long getRecipe_id() {
+        return recipe_id;
+    }
+
+    public void setRecipe_id(Long recipe_id) {
+        this.recipe_id = recipe_id;
     }
 
     @Override
     public String toString() {
-        return "Ingredient{" +
+        return "IngredientDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", measurement='" + measurement + '\'' +
-                ", recipe=" + recipe +
+                ", recipe_id=" + recipe_id +
                 '}';
     }
 }

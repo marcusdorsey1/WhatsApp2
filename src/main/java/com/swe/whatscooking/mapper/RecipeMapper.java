@@ -1,18 +1,19 @@
 package com.swe.whatscooking.mapper;
 
 import com.swe.whatscooking.entity.Recipe;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface RecipeMapper {
-    @Insert("INSERT INTO recipe (id, name, cuisine, serving_size, description, image)" +
-            " VALUES (#{id}, #{name}, #{cuisine}, #{serving_size}, #{description}, #{image}) ")
+    @Insert("INSERT INTO recipe (name, cuisine, serving_size, description, image)" +
+            " VALUES (#{name}, #{cuisine}, #{serving_size}, #{description}, #{image}) ")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int insertRecipe(Recipe recipe);
+    Long insertRecipe(Recipe recipe);
 
     @Delete("DELETE FROM recipe WHERE id = #{id}")
     void deleteRecipe(Long id);
+
+    @Select("SELECT TOP 1 id FROM recipe " +
+            "ORDER BY id DESC")
+    Long selectLastId();
 }

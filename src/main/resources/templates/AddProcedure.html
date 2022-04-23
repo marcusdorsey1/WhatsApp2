@@ -12,7 +12,8 @@
     <div class="row">
         <div class="col-6 offset-lg-3">
             <h2>Create Process Step</h2>
-            <form class="" action="#" th:action="@{/recipeDir/create-process}" method="POST">
+            <form class="" action="#" th:action="@{/processes/add-process}" method="POST">
+                <input type="hidden" name="recipe_id" th:value="${recipeId}">
                 <dl class="form-group">
                     <dt class="form-control-label">Step</dt>
                     <dd><input class="form-control" type="number" name="step"/></dd>
@@ -23,7 +24,7 @@
                 </dl>
                 <div>
                     <input class="btn btn-primary" type="submit" value="Add Process">
-                    <a th:href="@{/recipeDir/create-process)}" class="btn btn-light">Finish</a>
+                    <a th:href="@{/my-recipes}" class="btn btn-light">Finish</a>
                 </div>
             </form>
         </div>
