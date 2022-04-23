@@ -37,6 +37,11 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <span id="logoutDiv">
+                <form action="#" th:action="@{/logout}" method="POST">
+                    <button type="submit" class="btn btn-secondary float-right">Logout</button>
+                </form>
+            </span>
         </div>
     </div>
 </nav>

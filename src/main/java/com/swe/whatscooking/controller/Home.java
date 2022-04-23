@@ -27,7 +27,7 @@ public class Home {
 
     @GetMapping
     public String getHomePage(Model model){
-        /*List<RecipeDTO> recipesDTO = new ArrayList<RecipeDTO>();
+        List<RecipeDTO> recipesDTO = new ArrayList<RecipeDTO>();
         try {
             List<TastyRecipe> tastyRecipes = tastyAPIService.getTastyRecipes();
             for (TastyRecipe tastyRecipe:tastyRecipes) {
@@ -36,7 +36,7 @@ public class Home {
         }catch (Exception e){
             System.out.println(e);
         }
-        model.addAttribute("recipes", recipesDTO);*/
+        model.addAttribute("recipes", recipesDTO);
         return "weeklyView";
     }
 
