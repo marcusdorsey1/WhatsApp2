@@ -44,3 +44,5 @@ INSERT INTO process(id ,recipe_id ,step , description) VALUES (19,3,4,'Put the b
 
 INSERT INTO menu (id ,recipe_id , source) VALUES (1,1,'Internal');
 INSERT INTO menu (id ,recipe_id , source) VALUES (2,2,'Internal');
+
+INSERT INTO favorite (id ,recipe_id , source) VALUES (1,1,'Internal');
