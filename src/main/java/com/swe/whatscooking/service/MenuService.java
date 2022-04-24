@@ -17,4 +17,8 @@ public class MenuService {
     public List<Menu> getAllMenuItems(){
         return menuMapper.getAllMenuRecords();
     }
+
+    public Long addMenuItem(Menu menu){
+        return menuMapper.insertMenu(menu);
+    }
 }

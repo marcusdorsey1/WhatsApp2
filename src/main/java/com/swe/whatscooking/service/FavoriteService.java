@@ -17,4 +17,8 @@ public class FavoriteService {
     public List<Favorite> getAllFavoriteItems(){
         return favoriteMapper.getAllFavoriteRecords();
     }
+
+    public Long addFavoriteRecipe(Favorite favorite){
+        return favoriteMapper.insertFavorite(favorite);
+    }
 }

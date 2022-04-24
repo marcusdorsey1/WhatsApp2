@@ -46,6 +46,20 @@
                                 Delete
                             </button>
                         </form>
+                        <form action="#" method="POST" th:action="@{/my-favorites/add}">
+                            <input type="hidden" name="recipe_id" th:value="${recipe.id}">
+                            <input type="hidden" name="source" th:value="${recipe.source}">
+                            <button type="submit" class="btn btn-warning">
+                                Add to Favorites
+                            </button>
+                        </form>
+                        <form action="#" method="POST" th:action="@{/my-menu/add}">
+                            <input type="hidden" name="recipe_id" th:value="${recipe.id}">
+                            <input type="hidden" name="source" th:value="${recipe.source}">
+                            <button type="submit" class="btn btn-info">
+                                Add to Menu
+                            </button>
+                        </form>
                     </td>
                     <td>
                         <img th:src="${recipe.image}" class="card-img-top rounded" alt="...">

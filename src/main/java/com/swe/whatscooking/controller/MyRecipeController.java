@@ -1,12 +1,15 @@
 package com.swe.whatscooking.controller;
 
+import com.swe.whatscooking.dto.RecipeDTO;
 import com.swe.whatscooking.entity.Recipe;
 import com.swe.whatscooking.service.MyRecipeService;
 import com.swe.whatscooking.service.RecipeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,7 +26,14 @@ public class MyRecipeController {
     @GetMapping()
     public String getRegistrationForm(Model model){
         List<Recipe> recipes = recipeService.retrieveAllRecipes();
-        model.addAttribute("recipes", recipes);
+        List<RecipeDTO> recipesDTO = new ArrayList<>();
+        RecipeDTO recipeDTO;
+        for (Recipe recipe:recipes) {
+            recipeDTO = convertInternalRecipeToRecipeDTO(recipe);
+            recipeDTO.setSource("Internal");
+            recipesDTO.add(recipeDTO);
+        }
+        model.addAttribute("recipes", recipesDTO);
         return "ViewAllRecipes";
     }
 
@@ -47,6 +57,12 @@ public class MyRecipeController {
         myRecipeService.removeProcesses(recipe.getId());
         myRecipeService.deleteRecipe(recipe.getId());
         return "redirect:/my-recipes";
+    }
+
+    private RecipeDTO convertInternalRecipeToRecipeDTO(Recipe recipe){
+        RecipeDTO recipeDTO = new RecipeDTO();
+        BeanUtils.copyProperties(recipe, recipeDTO);
+        return recipeDTO;
     }
 
 }
