@@ -48,9 +48,11 @@
 
         <div class=" container p-5">
             <div class="row">
-            <div class="col-6 offset-lg-3">
-                <h2 th:text="${recipe.name}">Recipe Name</h2>
-                <img th:src="${recipe.thumbnail_url}" class="rounded border" alt="Missing" width="500" height="300"></div>
+                <div class="col-6 offset-lg-3">
+                    <h2 th:text="${recipe.name}">Recipe Name</h2>
+                    <img th:if="${recipe.source == 'Internal'}" th:src="${recipe.image}" class="rounded border" alt="Missing" width="500" height="300">
+                    <img th:unless="${recipe.source == 'Internal'}" th:src="${recipe.thumbnail_url}" class="rounded border" alt="Missing" width="500" height="300">
+                </div>
             </div>
                 <div class="row">
                 <div class="col-6 offset-lg-3">

@@ -33,12 +33,24 @@ public class recipeDir {
     }*/
 
     @GetMapping
-    public String getRecipeDir(@RequestParam("recipeId") Long recipeId, Model model){
+    public String getRecipeDir(@RequestParam("recipeId") Long recipeId, @RequestParam("source") String source, Model model){
         System.out.println(recipeId);
+        System.out.println(source);
         RecipeDTO recipeDTO;
         try {
-            TastyRecipe tastyRecipe = this.tastyAPIService.getTastyRecipeById(recipeId);
-            recipeDTO = convertTastyRecipeToRecipeDTO(tastyRecipe);
+            if (source.equals("TastyAPI")) {
+                TastyRecipe tastyRecipe = this.tastyAPIService.getTastyRecipeById(recipeId);
+                recipeDTO = convertTastyRecipeToRecipeDTO(tastyRecipe);
+                recipeDTO.setSource("TastyAPI");
+            }
+            else if(source.equals("Internal")){
+                Recipe internalRecipe = this.recipeService.retrieveRecipeByID(recipeId);
+                recipeDTO = convertInternalRecipeToRecipeDTO(internalRecipe);
+                recipeDTO.setSource("Internal");
+            }
+            else{
+                recipeDTO = new RecipeDTO();
+            }
             model.addAttribute("recipe", recipeDTO);
             System.out.println(recipeDTO.getName() + recipeDTO.getImage());
         }catch (Exception e){
@@ -66,6 +78,12 @@ public class recipeDir {
         BeanUtils.copyProperties(tastyRecipe, recipeDTO);
         recipeDTO.setProcesses(processes);
         recipeDTO.setIngredients(ingredients);
+        return recipeDTO;
+    }
+
+    private RecipeDTO convertInternalRecipeToRecipeDTO(Recipe recipe){
+        RecipeDTO recipeDTO = new RecipeDTO();
+        BeanUtils.copyProperties(recipe, recipeDTO);
         return recipeDTO;
     }
 }

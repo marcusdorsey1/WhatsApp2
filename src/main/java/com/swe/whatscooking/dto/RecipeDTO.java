@@ -20,6 +20,7 @@ public class RecipeDTO {
     private String thumbnail_url;
     private List<TastySection> sections;
     private List<TastyInstruction> instructions;
+    private String source;
 
     public RecipeDTO() {
     }
@@ -66,8 +67,10 @@ public class RecipeDTO {
     }
 
     public String getImage() {
-        return getThumbnail_url();
-        //return image;
+        if (source.equals("TastyAPI")) {
+            return getThumbnail_url();
+        }
+        return image;
     }
 
     public void setImage(String image) {
@@ -120,5 +123,13 @@ public class RecipeDTO {
 
     public void setInstructions(List<TastyInstruction> instructions) {
         this.instructions = instructions;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
