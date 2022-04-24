@@ -16,7 +16,7 @@ public class TastyAPIService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public List<TastyRecipe> getTastyRecipes() throws Exception {
+    public List<TastyRecipe> getTastyRecipesByTag(String searchWord) throws Exception {
         // API Website link https://sv443.net/jokeapi/v2/
         HttpHeaders responseHeaders = new HttpHeaders();
         List<MediaType> list = new ArrayList<>();
@@ -28,12 +28,32 @@ public class TastyAPIService {
 
         // Removed line, while we are not using the functionality
         ResponseEntity<TastyRecipeSearch> tastyRecipeSearch = restTemplate.exchange(
-                URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=7&tags=under_30_minutes"),HttpMethod.GET, request, TastyRecipeSearch.class);
+                URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=5&tags=" + searchWord),HttpMethod.GET, request, TastyRecipeSearch.class);
         //KrogerClient krogerClient = new KrogerClient();
         System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
 
         return tastyRecipeSearch.getBody().getResults();
     }
+
+    public List<TastyRecipe> getTastyRecipesByQ(String searchWord) throws Exception {
+        // API Website link https://sv443.net/jokeapi/v2/
+        HttpHeaders responseHeaders = new HttpHeaders();
+        List<MediaType> list = new ArrayList<>();
+        list.add(MediaType.APPLICATION_JSON);
+        responseHeaders.setAccept(list);
+        responseHeaders.add("X-RapidAPI-Host", "tasty.p.rapidapi.com");
+        responseHeaders.add("X-RapidAPI-Key", "577422b5c7mshcf41f00911ef268p1b79f5jsn812ae4218dff");
+        HttpEntity<String> request = new HttpEntity<String>(responseHeaders);
+
+        // Removed line, while we are not using the functionality
+        ResponseEntity<TastyRecipeSearch> tastyRecipeSearch = restTemplate.exchange(
+                URI.create("https://tasty.p.rapidapi.com/recipes/list?from=0&size=5&q=" + searchWord), HttpMethod.GET, request, TastyRecipeSearch.class);
+        //KrogerClient krogerClient = new KrogerClient();
+        System.out.println(tastyRecipeSearch.getBody().getResults().get(1).toString());
+
+        return tastyRecipeSearch.getBody().getResults();
+    }
+
     public TastyRecipe getTastyRecipeById(Long id) throws Exception {
         // API Website link https://sv443.net/jokeapi/v2/
         HttpHeaders responseHeaders = new HttpHeaders();

@@ -10,6 +10,8 @@ import com.swe.whatscooking.mapper.ProcessMapper;
 import com.swe.whatscooking.mapper.RecipeMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MyRecipeService {
     private RecipeMapper recipeMapper;
@@ -45,5 +47,9 @@ public class MyRecipeService {
 
     public void removeProcesses(Long recipeId){
         processMapper.deleteProcesses(recipeId);
+    }
+
+    public List<Recipe> searchForRecipes(String searchWord){
+        return recipeMapper.searchForRecipe(searchWord);
     }
 }
