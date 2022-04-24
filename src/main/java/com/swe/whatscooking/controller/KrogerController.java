@@ -1,6 +1,6 @@
 package com.swe.whatscooking.controller;
 
-import com.swe.whatscooking.entity.KrogerCustomer;
+import com.swe.whatscooking.entity.KrogerAPI.KrogerCustomer;
 import com.swe.whatscooking.service.KrogerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
