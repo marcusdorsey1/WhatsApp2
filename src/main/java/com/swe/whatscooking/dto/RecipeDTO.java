@@ -50,8 +50,10 @@ public class RecipeDTO {
     }
 
     public Integer getServing_size() {
-        return getNum_servings();
-        //return serving_size;
+        if (source.equals("TastyAPI")) {
+            return getNum_servings();
+        }
+        return serving_size;
     }
 
     public void setServing_size(Integer serving_size) {

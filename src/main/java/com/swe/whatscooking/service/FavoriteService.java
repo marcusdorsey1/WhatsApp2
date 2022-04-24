@@ -1,6 +1,7 @@
 package com.swe.whatscooking.service;
 
 import com.swe.whatscooking.entity.Favorite;
+import com.swe.whatscooking.entity.Menu;
 import com.swe.whatscooking.mapper.FavoriteMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,9 @@ public class FavoriteService {
 
     public Long addFavoriteRecipe(Favorite favorite){
         return favoriteMapper.insertFavorite(favorite);
+    }
+
+    public void removeFavoriteItem(Favorite favorite){
+        favoriteMapper.deleteFavorite(favorite);
     }
 }
