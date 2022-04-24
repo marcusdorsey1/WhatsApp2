@@ -36,6 +36,7 @@
                     <td>
                         <form action="#" method="GET" th:action="@{/recipeDir}">
                             <input type="hidden" name="recipeId" th:value="${recipe.id}">
+                            <input type="hidden" name="source" th:value="${recipe.source}">
                             <button type="submit" class="btn btn-primary">
                                 View
                             </button>

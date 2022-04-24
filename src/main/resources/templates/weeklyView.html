@@ -53,8 +53,13 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe.name}">Recipe Name</h5>
                     <p class="card-text" th:text="${recipe.description}">Recipe Description</p>
-                    <a target="_blank" th:href="@{/recipeDir(recipeId=${recipe.id})}" type="submit" class="btn btn-primary">Details</a>
-                    <button type="button" class="btn btn-primary">Next Recipe</button>
+                    <a th:href="@{/recipeDir(recipeId=${recipe.id}, source=${recipe.source})}" class="btn btn-primary">Details</a>
+                    <form action="#" method="POST" th:action="@{/my-menu/delete}">
+                        <input type="hidden" name="recipe_id" th:value="${recipe.id}">
+                        <input type="hidden" name="source" th:value="${recipe.source}">
+                        <button type="submit" class="btn btn-danger">Remove from Menu</button>
+                    </form>
+
                 </div>
             </div>
         </div>

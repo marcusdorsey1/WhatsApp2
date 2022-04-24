@@ -21,4 +21,8 @@ public class MenuService {
     public Long addMenuItem(Menu menu){
         return menuMapper.insertMenu(menu);
     }
+
+    public void removeMenuItem(Menu menu){
+        menuMapper.deleteMenu(menu);
+    }
 }
