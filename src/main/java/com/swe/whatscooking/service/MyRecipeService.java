@@ -52,4 +52,8 @@ public class MyRecipeService {
     public List<Recipe> searchForRecipes(String searchWord){
         return recipeMapper.searchForRecipe(searchWord);
     }
+
+    public List<IngredientDTO> searchForIngredientsByRecipeId(Long recipeId){
+        return ingredientMapper.selectIngredientsByID(recipeId);
+    }
 }

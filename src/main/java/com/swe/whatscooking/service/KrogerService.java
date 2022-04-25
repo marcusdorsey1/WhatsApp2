@@ -1,20 +1,37 @@
 package com.swe.whatscooking.service;
 
+import com.swe.whatscooking.dto.RecipeDTO;
+import com.swe.whatscooking.entity.Ingredient;
 import com.swe.whatscooking.entity.KrogerAPI.KrogerCustomer;
+import com.swe.whatscooking.entity.Process;
+import com.swe.whatscooking.entity.Recipe;
+import com.swe.whatscooking.entity.TastyAPI.TastyComponent;
+import com.swe.whatscooking.entity.TastyAPI.TastyInstruction;
+import com.swe.whatscooking.entity.TastyAPI.TastyRecipe;
+import com.swe.whatscooking.entity.TastyAPI.TastySection;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @Service
 public class KrogerService {
     private RestTemplate restTemplate;
+    private MyRecipeService myRecipeService;
+    private TastyAPIService tastyAPIService;
+    private RecipeService recipeService;
 
-    public KrogerService(RestTemplate restTemplate) {
+    public KrogerService(RestTemplate restTemplate, MyRecipeService myRecipeService, TastyAPIService tastyAPIService, RecipeService recipeService) {
         this.restTemplate = restTemplate;
+        this.myRecipeService = myRecipeService;
+        this.tastyAPIService = tastyAPIService;
+        this.recipeService = recipeService;
     }
 
     public KrogerCustomer getAccessToken(String code){
@@ -60,6 +77,55 @@ public class KrogerService {
         // Contacting Cart Rest Endpoint using PUT request
         restTemplate.put("https://api.kroger.com/v1/cart/add",request);
         return;
+    }
+
+    public String getProducts(Long recipeId, String source){
+        RecipeDTO recipeDTO;
+        try {
+            if (source.equals("TastyAPI")) {
+                TastyRecipe tastyRecipe = this.tastyAPIService.getTastyRecipeById(recipeId);
+                recipeDTO = convertTastyRecipeToRecipeDTO(tastyRecipe);
+                recipeDTO.setSource("TastyAPI");
+            }
+            else if(source.equals("Internal")){
+                Recipe internalRecipe = this.recipeService.retrieveRecipeByID(recipeId);
+                recipeDTO = convertInternalRecipeToRecipeDTO(internalRecipe);
+                recipeDTO.setSource("Internal");
+            }
+            else{
+                recipeDTO = new RecipeDTO();
+            }
+            //model.addAttribute("recipe", recipeDTO);
+            System.out.println(recipeDTO.getName() + recipeDTO.getImage());
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    private RecipeDTO convertTastyRecipeToRecipeDTO(TastyRecipe tastyRecipe){
+        RecipeDTO recipeDTO = new RecipeDTO();
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        List<Process> processes = new ArrayList<Process>();
+
+        for (TastyInstruction tastyInstruction:tastyRecipe.getInstructions()) {
+            processes.add(new Process(tastyInstruction.getDisplay_text(), tastyInstruction.getPosition()));
+        }
+
+        for (TastySection tastySection:tastyRecipe.getSections()) {
+            for(TastyComponent tastyComponent: tastySection.getComponents()){
+                ingredients.add(new Ingredient(tastyComponent.getIngredient().getName(), tastyComponent.getRaw_text()));
+            }
+        }
+        BeanUtils.copyProperties(tastyRecipe, recipeDTO);
+        recipeDTO.setProcesses(processes);
+        recipeDTO.setIngredients(ingredients);
+        return recipeDTO;
+    }
+
+    private RecipeDTO convertInternalRecipeToRecipeDTO(Recipe recipe){
+        RecipeDTO recipeDTO = new RecipeDTO();
+        BeanUtils.copyProperties(recipe, recipeDTO);
+        return recipeDTO;
     }
 
 }

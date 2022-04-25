@@ -56,12 +56,14 @@
             </div>
                 <div class="row">
                 <div class="col-6 offset-lg-3">
-                    <form action="#" method="GET" th:action="@{/krogerAPI}" class="rounded">
-                        <p><h4>Select your ingredients to order:</h4></p>
-                        <div th:each="ingredient : ${recipe.ingredients}">
+                    <p><h4>Select your ingredients to order:</h4></p>
+                    <div th:each="ingredient : ${recipe.ingredients}">
                           <input type="checkbox" th:name="${ingredient.name}">
                           <label th:text="${ingredient.name}">Ingredient</label>
-                        </div>
+                    </div>
+                    <form action="#" method="GET" th:action="@{/krogerAPI}" class="rounded">
+                        <input type="hidden" name="recipe_id" th:value="${recipe.id}">
+                        <input type="hidden" name="source" th:value="${recipe.source}">
                         <input class="btn btn-primary" type="submit" value="Order Ingredients">
                     </form>
                     <form action="#" method="POST" th:action="@{/my-favorites/add}">

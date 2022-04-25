@@ -1,12 +1,10 @@
 package com.swe.whatscooking.mapper;
 
 import com.swe.whatscooking.dto.IngredientDTO;
-import com.swe.whatscooking.entity.Ingredient;
-import com.swe.whatscooking.entity.Recipe;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+
 
 @Mapper
 public interface IngredientMapper {
@@ -17,4 +15,8 @@ public interface IngredientMapper {
 
     @Delete("DELETE FROM ingredient WHERE recipe_id = #{recipeId}")
     void deleteIngredients(Long recipeId);
+
+    @Select("SELECT * FROM ingredient WHERE recipe_id = #{recipeId}")
+    List<IngredientDTO> selectIngredientsByID(Long recipeId);
+
 }
