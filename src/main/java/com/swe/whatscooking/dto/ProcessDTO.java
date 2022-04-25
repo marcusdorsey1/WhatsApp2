@@ -13,6 +13,9 @@ public class ProcessDTO {
         this.recipe_id = recipe_id;
     }
 
+    public ProcessDTO() {
+    }
+
     public Long getId() {
         return id;
     }

@@ -15,6 +15,9 @@ public class IngredientDTO {
         this.recipe_id = recipe_id;
     }
 
+    public IngredientDTO() {
+    }
+
     public Long getId() {
         return id;
     }
