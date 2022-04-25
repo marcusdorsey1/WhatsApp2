@@ -1,6 +1,9 @@
 package com.swe.whatscooking;
 
+import com.swe.whatscooking.dto.RecipeDTO;
+import com.swe.whatscooking.entity.KrogerAPI.KrogerAPIResponse;
 import com.swe.whatscooking.entity.KrogerAPI.KrogerClient;
+import com.swe.whatscooking.entity.Recipe;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -8,7 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @SpringBootApplication
 public class WhatsCookingApplication {
@@ -20,6 +25,11 @@ public class WhatsCookingApplication {
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
+	}
+
+	@Bean
+	public RecipeDTO recipeDTO(){
+		return new RecipeDTO();
 	}
 
 	@Bean
@@ -38,10 +48,9 @@ public class WhatsCookingApplication {
 //		System.out.println("Here is the body Body? " + request.getBody());
 
 		// Removed line, while we are not using the functionality
-		// KrogerClient krogerClient = restTemplate.postForObject("https://api.kroger.com/v1/connect/oauth2/token",request, KrogerClient.class);
+		//KrogerClient krogerClient = restTemplate.postForObject("https://api.kroger.com/v1/connect/oauth2/token",request, KrogerClient.class);
 		KrogerClient krogerClient = new KrogerClient();
 		System.out.println(krogerClient.toString());
-
 		return krogerClient;
 	}
 

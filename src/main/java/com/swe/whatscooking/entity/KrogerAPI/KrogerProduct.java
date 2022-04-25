@@ -11,6 +11,9 @@ public class KrogerProduct {
         this.brand = brand;
     }
 
+    public KrogerProduct() {
+    }
+
     public String getUpc() {
         return upc;
     }

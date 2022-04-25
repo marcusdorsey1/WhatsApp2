@@ -15,8 +15,9 @@ public class KrogerController {
     private KrogerService krogerService;
     private RecipeDTO orderRecipe;
 
-    public KrogerController(KrogerService krogerService) {
+    public KrogerController(KrogerService krogerService, RecipeDTO orderRecipe) {
         this.krogerService = krogerService;
+        this.orderRecipe = orderRecipe;
     }
 
     @GetMapping("/krogerAPI")
@@ -52,9 +53,9 @@ public class KrogerController {
         // Service that creates generates the access token with the provided code of authorization from Kroger
         krogerCustomer = krogerService.getAccessToken(code);
         // Getting list of products
-        String products = krogerService.getProducts(orderRecipe.getId(), orderRecipe.getSource());
+        String products = krogerService.getProductsPayload(orderRecipe.getId(), orderRecipe.getSource());
         // Sending request to add products into the Kroger Cart
-        krogerService.orderProducts(krogerCustomer.getAccess_token(),"0001111041700");
+        krogerService.orderProducts(krogerCustomer.getAccess_token(),products);
         return "redirect:home";
     }
 }

@@ -9,6 +9,9 @@ public class KrogerAPIResponse {
         this.data = data;
     }
 
+    public KrogerAPIResponse() {
+    }
+
     public List<KrogerProduct> getData() {
         return data;
     }
