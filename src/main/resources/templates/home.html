@@ -11,90 +11,53 @@
 
 <nav class="navbar  border navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" role="navigation">
         <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/home}"><h3>What's Cooking</h3></a>
+        <a class="navbar-brand" th:href="@{/home}" style="font-family:Comic Sans MS"><h1>What's Cooking</h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">Weekly Menu</a>
+                    <a class="nav-link" th:href="@{/my-menu}">Weekly Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">Favorite's</a>
+                    <a class="nav-link" th:href="@{/my-favorites}">Favorite's</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">View My Recipes</a>
+                    <a class="nav-link" th:href="@{/my-recipes}">View Created Recipes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">Create Recipe</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">API Documentation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./weeklyView.html">Search</a>
-                </li>
-                <li class="nav-item float-right">
-                    <a class="btn btn-danger" href="./weeklyView.html">Logout</a>
+                    <a class="nav-link" th:href="@{/search}">Search for Recipes</a>
                 </li>
             </ul>
+            <a class="nav-link float-right" th:href="@{/swagger-ui/index.html}">API Documentation</a>
+            <div id="logoutDiv">
+                <form action="#" th:action="@{/logout}" method="POST">
+                    <button type="submit" class="btn btn-secondary float-right">Logout</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="container p-5">
     <div class="row">
-       <div class="card-group" id="1234">
-           <div class="card p-1">
-               <img th:src="@{/img/sandwich.jpg}" class="card-img-top rounded" alt="...">
-               <div class="card-body">
-                   <h5 class="card-title">Best Ever Tuna Melt</h5>
-                   <p class="card-text">Tuna lovers! Meet your ultimate sandwich. With just the right amount of crunch,
-                       melty cheddar cheese, and a couple good slices of tomato, you might even convert a tuna hater.
-                       The key to this sandwich is that the tuna salad is not your bog-standard, bland tuna salad.
-                       We packed this sandwhich full of celery, pickles, red onion and pepper flakes to make a flavorful
-                       salad that eats just as good by itself as it does in this sandwich</p>
-                   <a href="#" class="btn btn-primary">Details</a>
-               </div>
-
-           </div>
-           <div class="card p-1">
-               <img th:src="@{/img/food.jpg}" class="card-img-top rounded" alt="...">
-               <div class="card-body">
-                   <h5 class="card-title">Chicken Alfredo1</h5>
-                   <p class="card-text">It's the classic pasta we just can't seem to get enough of. Of course there are
-                       tons of jarred pasta sauces you can buy, but making alfredo sauce from scratch is actually so easy.</p>
-                   <a th:href="@{/recipeDir}" class="btn btn-primary">Details</a>
-               </div>
-           </div>
-           <div class=" card p-1">
-               <img th:src="@{/img/corn-dog.jpg}" class="card-img-top rounded" alt="...">
-               <div class="card-body">
-                   <h5 class="card-title">Perfect Corn Dog</h5>
-                   <p class="card-text">No one can deny the crispy, slightly sweet, perfectly fried lure of a corn dog.
-                       Luckily, they are actually super easy to make at home. The batter fries up quickly and super
-                       crispy—just like a good corn dog should be! These will transport you back to being a kid at the
-                       local fair. Read on for tips to making the best corn dogs ever.</p>
-                   <a href="#" class="btn btn-primary">Details</a>
-               </div>
-           </div>
-           <div class="card p-1">
-               <img th:src="@{/img/nachos.jpg}" class="card-img-top rounded" alt="...">
-               <div class="card-body">
-                   <h5 class="card-title">Nacho Cheese</h5>
-                   <p class="card-text">There is something so enticing about nacho cheese from concession stands: silky
-                       smooth, pleasantly tacky, clings to every chip, fry, and bite. Even if you aren't hungry, it's
-                       impossible to pass up. Now you can make it at home anytime the craving hits. We even dedicated a
-                       nacho casserole to the sauce! Serve this cheese with homemade chips, soft pretzels, or top your
-                       favorite nachos with it!</p>
-                   <a href="#" class="btn btn-primary">Details</a>
-               </div>
-           </div>
-       </div>
+        <div class="card-group" id="1234">
+            <div class="card p-1 border border-primary">
+                <img th:src="@{/img/sandwich.jpg}" class="card-img-top rounded" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">What's Cooking</h5>
+                    <p class="card-text">Welcome to the place where deciding what to eat has come a thing of the past.
+                        Here you can select the dish you want and order all the ingredients you need at your local Krogers.
+                        If that's not enough you can store your own recipes for later review, all while a weekly recipe can
+                        generated for your comfort.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
