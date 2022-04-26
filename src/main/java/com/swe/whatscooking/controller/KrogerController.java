@@ -30,9 +30,9 @@ public class KrogerController {
         String scope = "cart.basic:write";
         String clientId = "whatscooking-acf72f4b2dbda6aa726382a398050a863025969198037206606";
         //Redirect URI for Heroku
-        //String redirectUri = "https://whats-cooking-app-swe6813.herokuapp.com/callback";
+        String redirectUri = "https://whats-cooking-app-swe6813.herokuapp.com/callback";
         // Redirect URI for test ENV
-        String redirectUri = "http://127.0.0.1:5000/callback";
+        //String redirectUri = "http://127.0.0.1:5000/callback";
         // Adding headers to the Redirect request for Kroger permission
         redirectAttributes.addAttribute("scope",scope);
         redirectAttributes.addAttribute("response_type","code");

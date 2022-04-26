@@ -44,7 +44,7 @@ public class KrogerService {
         String clientId = "whatscooking-acf72f4b2dbda6aa726382a398050a863025969198037206606";
         String clientSecret = "5yRrceH3sR53QNA7AfC9JTp6I4KTYdmVCvDyBxxA";
         String body = "grant_type=authorization_code";
-        String redirectUri = "http://127.0.0.1:8080/callback";
+        String redirectUri = "https://whats-cooking-app-swe6813.herokuapp.com/callback";
         body = body + "&code=" + code;
         body = body + "&redirect_uri=" + redirectUri;
         // Encoding the Authorization
