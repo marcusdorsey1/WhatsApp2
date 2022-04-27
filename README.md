@@ -21,3 +21,7 @@ Feel free to review in order to see details about the development process.
 
 ## Program Documentation
 In order to test the various features, please follow the steps detail on the `documents` folder inside the git repo. [link](https://github.com/marcusdorsey1/WhatsApp2/tree/main/documents)
+
+## Login Information
+- _Username_: user
+- _Password_: password
